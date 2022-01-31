@@ -13,7 +13,7 @@ import (
 )
 
 var dbHost = os.Getenv("dbHost")
-var dbPort = 5432
+var dbPort = os.Getenv("dbPort")
 var dbUser = os.Getenv("dbUser")
 var dbPassword = os.Getenv("dbPassword")
 var dbName = os.Getenv("dbName")
