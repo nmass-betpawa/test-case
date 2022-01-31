@@ -1,3 +1,3 @@
 ## Deploy
-helm dependency update ./helm/
+helm dependency update ./helm/  
 helm install test ./helm
