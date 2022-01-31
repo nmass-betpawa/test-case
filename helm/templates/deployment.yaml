@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.fullname }}
+  namespace: "{{ .Release.Namespace }}"
+  labels:
+    chart: {{ .Chart.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.fullname }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.fullname }}
+        chart: {{ .Chart.Name }}
+        release: "{{ .Chart.Version }}"
+    spec:
+      containers:
+        - name: {{ .Values.fullname }}
+          image: "{{ .Values.image.name }}:{{ .Values.image.tag }}"
+          imagePullPolicy: Always
+          env:
+            - name: dbHost
+              value: {{ .Values.database.host }}
+            - name: dbPort
+              value: "{{ .Values.database.port }}"
+            - name: dbUser
+              value: {{ .Values.database.user }}
+            - name: dbName
+              value: {{ .Values.database.name }}
+          envFrom:
+            - secretRef:
+                name: {{ .Values.database.secret }}
+          readinessProbe:
+            httpGet:
+              path: "/"
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: "/"
+              port: 8080
+            initialDelaySeconds: 240
+            periodSeconds: 30
+            failureThreshold: 3

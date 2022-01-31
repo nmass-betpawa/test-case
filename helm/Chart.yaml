@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+name: test
+version: 0.0.0-SNAPSHOT
+
+dependencies:
+  - name: postgresql-ha
+    version: 8.0.3
+    repository: https://charts.bitnami.com/bitnami

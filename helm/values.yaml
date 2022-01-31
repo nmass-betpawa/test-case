@@ -1,0 +1,16 @@
+postgresql-ha:
+  postgresql:
+    password: password
+  clusterDomain: qa.k8s
+
+fullname: test
+image:
+  name: lohmag/paxful
+  tag: latest
+
+database:
+  host: test-postgresql-ha-postgresql
+  port: "5432"
+  user: postgres
+  name: postgres
+  secret: test
