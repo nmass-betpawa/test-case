@@ -1,7 +1,7 @@
 postgresql-ha:
   postgresql:
     password: password
-  clusterDomain: qa.k8s
+  clusterDomain: cluster.local
 
 fullname: test
 image:
